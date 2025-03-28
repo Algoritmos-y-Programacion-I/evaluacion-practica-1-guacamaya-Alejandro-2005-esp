@@ -4,34 +4,25 @@ import java.util.Scanner;
 
 public class Guacamaya {
 
-    // Scanner global para todo el programa
     public static Scanner reader;
-    // Arreglos de precios y unidades para todo el programa
     public static double[] precios;
     public static int[] unidades;
-
+    public static int referencias;
+    
     public static void main(String[] args) {
 
         inicializarGlobales();
         menu();
     }
 
-    /**
-     * Descripcion: Este metodo se encarga de iniciar las variables globales
-     * pre: El Scanner reader debe estar declarado
-     * pos: l Scanner reader queda inicializado
-    */
+   
     public static void inicializarGlobales() {
 
         reader = new Scanner(System.in);
 
     }
 
-    /**
-     * Descripcion: Este metodo se encarga de desplegar el menu al usuario y mostrar los mensajes de resultado para cada funcionalidad
-     * pre: El Scanner reader debe estar inicializado
-     * pre: El arreglo precios debe estar inicializado
-    */
+    
     public static void menu() {
 
         System.out.println("Bienvenido a Guacamaya!");
@@ -85,54 +76,89 @@ public class Guacamaya {
 
     }
 
-    /**
-     * Descripcion: Este metodo se encarga de preguntar al usuario el numero de referencias de producto diferentes 
-     * vendidas en el dia e inicializa con ese valor los arreglos encargados de almacenar precios y cantidades
-     * pre: El Scanner reader debe estar inicializado
-     * pre: Los arreglos precios y unidades deben estar declarados
-     * pos: Los arreglos precios y unidades quedan inicializados
-     */
+   
     public static void establecerCantidadVendida() {
 
         System.out.println("\nDigite el numero de referencias de producto diferentes vendidas en el dia ");
-        int referencias = reader.nextInt();
+        referencias = reader.nextInt();
 
         precios = new double[referencias];
         unidades = new int[referencias];
+    
 
     }
-
+/**
+ * Descripcion: se solicitan las referencias, la cantidad de productos y su precios
+ * 
+ */
     public static void solicitarDatos(){
-
-        
-     
+        for (int i = 0; i < precios.length; i++){
+            System.out.println(" Ingrese el precio de la referencia" + (i +1) + ":");
+            precios[i] = reader.nextDouble();
+            System.out.println("Ingrese la cantidad vendida de la referencias" + (i + 1) + ":");
+            unidades[i] = reader.nextInt();
+        }
     }
+
+     
 
     public static int calcularTotalUnidadesVendidas(){
+        int totalUnidades = 0;
+        for(int cantidad: unidades){
+            totalUnidades += cantidad;
+        }
 
-        return 0;
+        return totalUnidades;
+        /**
+         * descripcion: calcula el promedi ode preciso de las referncias
+         * pre.precios debe de tener al menos un dato
+         * pos: musetraelñ promedio de precios fde todas las referncias 
+         * entradas: precios
+         * Porceso: suma todos los precios y divide por precios.length
+         * salida: determina el promedio de todos los productos de las referncias y los plasma en la consola
+         */
 
 
     }
 
     public static double calcularPrecioPromedio(){
+        double sumaPrecios = 0;
+        for(double precio : precios){
+            sumaPrecios += precio;
+        }
 
-        return 0;
-
+        return sumaPrecios / precios.length;
 
     }
+    /**Descripcion: calcula las ventas totales  de todos los productos
+     * pre: precios debe de tener al menos un dato 
+     * pos: muestra las ventas totales de la consola
+     * entradas: precios[]
+     * proceso: multiplica el precios[i]* unidades [i] en ciclo hasta que se hayan calculado todos
+     * salidad: determina la cantidad de ventas totales y demuestra en la consola
+     */
 
     public static double calcularVentasTotales(){
-
-        return 0;
+        double totalVentas = 0;
+        for(int i = 0; i < precios.length; i++){
+            totalVentas += precios[i] * unidades[i];
+        }
+        return totalVentas;
 
 
     }
 
     public static int consultarReferenciasSobreLimite(double limite){
+        int contador= 0
+        for(int cantidad: unidades){
+            if(cantidad>limite){
+                contador++; 
+            }
+        }
 
-        return 0;
+        return contador;
 
     }
-
 }
+
+
